@@ -197,7 +197,7 @@ function printBoard(grid, type = "color"){
 
 
 function updateBoard(board){
-    countPieces(board);
+    
 
     let possibleCells = 0;
     for (let y = 0; y < board.maxY; y++) {
@@ -252,6 +252,8 @@ function updateBoard(board){
 
     if (board.debug) printBoard(board.grid, "obj");
 
+
+    countPieces(board);
     return board;
 }
 
@@ -299,8 +301,6 @@ function countPieces(board){
         for (let x = 0; x < board.maxX; x++) {
             const cell = board.grid[y][x];
             if (cell.disabled) continue;
-
-            cell.el.className = 'cell';
             switch (cell.color) {
                 case "B":
                     blackBricks++;
