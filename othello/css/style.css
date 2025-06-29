@@ -34,6 +34,11 @@ body {
     opacity: 100%;
 }
 
+.bold {
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
 
 #infopanel {
     opacity: 100%;
@@ -51,8 +56,9 @@ body {
     grid-template-columns: 1fr 1fr 0;
 }
 
-#infopanel > #scores[hidden] {
-    display: none;
+#infopanel > #scores[hidden] > .hideable {
+    opacity: 0;
+    pointer-events: none;
 }
 
 #scores > .infospan {
@@ -66,7 +72,10 @@ body {
 
 #scores > .infospan.left {
     text-align: start;
-    padding-left: 5px;
+}
+
+#scores > .infospan.left::before {
+    content: ": ";
 }
 
 /* CONTROLS */

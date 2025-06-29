@@ -9,3 +9,7 @@ function toggleScores(){
     if (document.getElementById("scores").getAttribute("hidden") == "") document.getElementById("scores").removeAttribute("hidden");
     else document.getElementById("scores").setAttribute("hidden", "");
 }
+
+function undo(){
+    updateBoard(boardHistory[1])
+}

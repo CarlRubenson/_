@@ -124,8 +124,6 @@ function printBoard(grid, type = "color"){
 
 
 function updateBoard(board){
-    
-
     let possibleCells = 0;
     for (let y = 0; y < board.maxY; y++) {
         for (let x = 0; x < board.maxX; x++) {
@@ -159,6 +157,8 @@ function updateBoard(board){
                 default:
                     cell.el.classList.add('empty', 'impossible');
             }
+
+            //getAttackDimensions(cell);
         }
     }
 
@@ -169,18 +169,24 @@ function updateBoard(board){
 
     if (board.colorToMove == "B"){
         board.indicator.className = "indicator black";
+        document.getElementById("blackLabel").classList.add("bold");
+        document.getElementById("whiteLabel").classList.remove("bold");
         document.documentElement.style.setProperty('--highlightColor', 'var(--blackColor)');
         document.documentElement.style.setProperty('--highlightRotation', 'rotateY(0deg)');
     } else {
         board.indicator.className = "indicator white";
+        document.getElementById("whiteLabel").classList.add("bold");
+        document.getElementById("blackLabel").classList.remove("bold");
         document.documentElement.style.setProperty('--highlightColor', 'var(--whiteColor)');
         document.documentElement.style.setProperty('--highlightRotation', 'rotateY(180deg)');
     }
 
     if (board.debug) printBoard(board.grid, "obj");
 
-
     countPieces(board);
+
+
+
     return board;
 }
 
@@ -195,7 +201,10 @@ function makeMove(board, x, y){
         board.grid = flip(cell.neighbors[i], board.grid, board.colorToMove, i);
     }
     board.colorToMove = board.colorToMove == "B" ? "W" : "B";
-    updateBoard(board);
+    boardHistory.push(
+        updateBoard(board)
+    );
+    console.log(boardHistory);
     return board;
 }
 

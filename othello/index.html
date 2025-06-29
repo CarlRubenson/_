@@ -6,18 +6,21 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/board.css">
         <link rel="stylesheet" href="css/colors.css">
-        <script src="scripts/boardTemplates.js"></script>
+        <script src="scripts/globalVars.js"></script>
         <script src="scripts/domInteractions.js"></script>
         <script src="scripts/main.js"></script>
+        <script src="scripts/ai.js"></script>
         
     </head>
     <body>
         <div id="infopanel" class="sidepanel">
             <h1></h1>
             <p id="scores">
-                <span class="infospan right">Svart:</span><span class="infospan left" id="blackInfo">score</span><br />
-                <span class="infospan right">  Vit:</span><span class="infospan left" id="whiteInfo">score</span><br />
-                <span class="infospan right">Tomma:</span><span class="infospan left" id="emptyInfo">score</span><br />
+                <span class="infospan right" id="blackLabel">Svart</span><span class="infospan left hideable" id="blackInfo">---</span><br />
+                <span class="infospan right" id="whiteLabel">  Vit</span><span class="infospan left hideable" id="whiteInfo">---</span><br />
+                <span class="infospan right hideable">Tomma</span><span class="infospan left hideable" id="emptyInfo">---</span><br />
+                <span class="infospan right hideable">Bscore</span><span class="infospan left hideable" id="bsInfo">---</span><br />
+                <span class="infospan right hideable">Wscore</span><span class="infospan left hideable" id="wsInfo">---</span><br />
             </p>
         </div>
 
@@ -29,6 +32,7 @@
             <button id="cycleTypes">Cycle boards</button>
             <button id="toggleGuided" onclick="toggleGuidedMode()">Toggle guided</button>
             <button id="hideScores" onclick="toggleScores()">Toggle scores</button>
+            <button id="undo" onclick="undo()">Undo</button>
         </div>
 
     </body>
