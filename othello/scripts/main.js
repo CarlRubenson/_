@@ -19,17 +19,16 @@ const INIT_FUNCTION = (gridTemplate) => {
         "el": gridElement
     };
 
-    
+    // Delete old game
     while (gridElement.firstChild) {
         gridElement.removeChild(gridElement.firstChild);
     }
-    infoText("");
+    infoText("");  // Clear winner
     if (!board.guidedMode) gridElement.setAttribute("unguided", "");
 
-    gridElement.style.gridTemplateColumns = `repeat(${1 + maxWidth}, calc( var(--markerSize) * 1.25 ))`;    // Add one for label row
-    gridElement.style.gridTemplateRows = `repeat(${1 + maxHeight}, calc( var(--markerSize) * 1.25 ))`;
-    document.documentElement.style.setProperty('--markerSize', `calc( 100vh / ${maxHeight * 2} )`);
 
+    // Set cell size. Nr cells = cells + numbered labels; widtch based on height divided by nr cells + subtracted of the gap
+    document.documentElement.style.setProperty('--gridCells', `${maxWidth + 1}`);
 
     // Create grid
     for (let y = -1; y < maxHeight; y++) {
@@ -39,9 +38,7 @@ const INIT_FUNCTION = (gridTemplate) => {
                 const cell = document.createElement('div');
                 cell.className = 'label';
 
-                if (y == x) {
-                    board.indicator = cell;
-                }
+                if (y == x) cell.textContent = " ";
                 else if (y == -1) cell.textContent = x;
                 else cell.textContent = y;
 
@@ -168,13 +165,11 @@ function updateBoard(board){
     }
 
     if (board.colorToMove == "B"){
-        board.indicator.className = "indicator black";
         document.getElementById("blackLabel").classList.add("bold");
         document.getElementById("whiteLabel").classList.remove("bold");
         document.documentElement.style.setProperty('--highlightColor', 'var(--blackColor)');
         document.documentElement.style.setProperty('--highlightRotation', 'rotateY(0deg)');
     } else {
-        board.indicator.className = "indicator white";
         document.getElementById("whiteLabel").classList.add("bold");
         document.getElementById("blackLabel").classList.remove("bold");
         document.documentElement.style.setProperty('--highlightColor', 'var(--whiteColor)');

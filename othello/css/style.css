@@ -2,18 +2,31 @@
 
 
 body {
-    display: grid;
-    grid-template-columns: calc( var(--cellSize) * 2 ) 1fr calc( var(--cellSize) * 2 );
-    justify-content: center;
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    height: calc( 100vh - 20px);
+    margin: 10px;
     background-color: var(--bgColor);
-    padding: 0 50px 0 50px;
 }
 
 
+@media only screen and (max-width: 1390px) {
+	body {
+        display: flex;
+        flex-direction: column;
+        width: calc( 100vw - 20px);
+        margin: 0;
+    }
 
+    .grid {
+        order: 1;
+    }
+
+    .sidepanel {
+        order: 2;
+    }
+}
 
 
 /* Info */

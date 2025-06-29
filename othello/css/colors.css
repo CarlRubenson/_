@@ -7,5 +7,6 @@
     
     --markerSize: calc( 100vh / 15 );
     --cellSize: calc( var(--markerSize) * 1.25 );
+    --gridCells: 8;
     --highlightRotation: rotateY(0deg);
 }
