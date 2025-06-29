@@ -365,11 +365,6 @@ function infoText(str){
     infopanel.getElementsByTagName("h1")[0].textContent = str;
 }
 
-function toggleGuidedMode(){
-    if (document.getElementById("grid").getAttribute("unguided") == "") document.getElementById("grid").removeAttribute("unguided");
-    else document.getElementById("grid").setAttribute("unguided", "");
-}
-
 const MAIN = () => {
 
     let boardIndex = 0;
