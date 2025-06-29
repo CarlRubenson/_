@@ -20,7 +20,7 @@ const INIT_FUNCTION = (gridTemplate) => {
         "possibleCells": [],
         "movecount": 0,
         "history": [],
-        "computerColor": "B"
+        "computerColor": "both"
     };
 
     // Delete old game
@@ -110,6 +110,7 @@ const INIT_FUNCTION = (gridTemplate) => {
             const cell = board.grid[y][x];
             if (cell.disabled) continue;
             cell.el.addEventListener("click", function(){
+                if (!document.body.getAttribute("gameActive")) toggleActiveGame(true, board);
                 makeMove(board, x, y);
                 updateBoard(board);
             });
@@ -198,11 +199,10 @@ async function updateBoard(board){
     }
 
 
-    board.history.push(board);
+/*     board.history.push(board);
     if (board.history.length > 10) board.history.pop(); 
-    console.log(board.history);
-
-    if (board.computerColor == board.colorToMove || board.computerColor == "both") {
+ */
+    if (activeGame() && (board.computerColor == board.colorToMove || board.computerColor == "both")) {
         document.documentElement.style.pointerEvents = "none"; 
         let tmp = document.documentElement.style.getPropertyValue('--bgColor');
         document.documentElement.style.setProperty('--boardColor', 'grey');
@@ -327,9 +327,12 @@ const MAIN = () => {
 
     INIT_FUNCTION( templates[0] );
 
-    document.getElementById("newGame").addEventListener("click", () => {INIT_FUNCTION( templates[boardIndex] );} );
+    document.getElementById("newGame").addEventListener("click", () => {
+        toggleActiveGame(false);
+        INIT_FUNCTION( templates[boardIndex] );
+    } );
     document.getElementById("cycleTypes").addEventListener("click", (e) => {
-
+        toggleActiveGame(false);
         if (e.shiftKey) {
             if (--boardIndex == -1 ) boardIndex = templates.length - 1;
         } else if (++boardIndex == templates.length ) {
