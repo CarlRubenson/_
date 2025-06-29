@@ -24,6 +24,7 @@ const INIT_FUNCTION = (gridTemplate) => {
     };
 
     // Delete old game
+    document.documentElement.removeAttribute("endcounter");
     while (gridElement.firstChild) {
         gridElement.removeChild(gridElement.firstChild);
     }
@@ -110,9 +111,8 @@ const INIT_FUNCTION = (gridTemplate) => {
             const cell = board.grid[y][x];
             if (cell.disabled) continue;
             cell.el.addEventListener("click", function(){
-                if (!document.body.getAttribute("gameActive")) toggleActiveGame(true, board);
+                if (!board.endcounter && !document.body.getAttribute("gameActive")) toggleActiveGame(true, board);
                 makeMove(board, x, y);
-                updateBoard(board);
             });
             
         }
@@ -132,6 +132,12 @@ function printBoard(grid, type = "color"){
 
 async function updateBoard(board){
     console.log(board.movecount++);
+    document.documentElement.setAttribute("movecount", board.movecount);
+
+    if (document.documentElement.getAttribute("endcounter") == 2) {
+        return console.log("Prevented ending loop");
+    }
+
     board.possibleCells = [];
     for (let y = 0; y < board.maxY; y++) {
         for (let x = 0; x < board.maxX; x++) {
@@ -168,14 +174,11 @@ async function updateBoard(board){
         }
     }
 
+    highlightColor(board.colorToMove);
     if (board.colorToMove == "B"){
-        document.getElementById("blackLabel").classList.add("bold");
-        document.getElementById("whiteLabel").classList.remove("bold");
         document.documentElement.style.setProperty('--highlightColor', 'var(--blackColor)');
         document.documentElement.style.setProperty('--highlightRotation', 'rotateY(0deg)');
     } else {
-        document.getElementById("whiteLabel").classList.add("bold");
-        document.getElementById("blackLabel").classList.remove("bold");
         document.documentElement.style.setProperty('--highlightColor', 'var(--whiteColor)');
         document.documentElement.style.setProperty('--highlightRotation', 'rotateY(180deg)');
     }
@@ -185,16 +188,24 @@ async function updateBoard(board){
     countPieces(board);
     scorePieces(board);
 
+    console.log(verifyMoveCount(board));
 
     if (board.possibleCells.length == 0) {
         if (board.endcounter == 0){
             board.endcounter = 1;   // One player can't move
+            document.documentElement.setAttribute("endcounter", board.endcounter);
             board.colorToMove = board.colorToMove == "B" ? "W" : "B";
         } else if (board.endcounter == 1) {
             board.endcounter = 2;   // Neither player can't move
+            document.documentElement.setAttribute("endcounter", board.endcounter);
             endGameMessage(board);
+            toggleActiveGame(false);
+            return;
         }
     } else {
+
+        if (board.endcounter > 0) console.log(`Double ${board.colorToMove}!`)
+
         board.endcounter = 0;
     }
 
@@ -284,14 +295,16 @@ function countPieces(board){
 }
 
 
-async function endGameMessage(board){
+function endGameMessage(board){
 
-    const pieceCount = await countPieces(board);
+    const pieceCount = countPieces(board);
 
     let str = "";
     if (pieceCount.black > pieceCount.white){
+        highlightColor("B");
         infoText("Svart vann!"); 
     } else if (pieceCount.white > pieceCount.black) {
+        highlightColor("W");
         infoText("Vit vann!"); 
     } else {
         infoText("Oavgjort!"); 
@@ -345,11 +358,21 @@ const MAIN = () => {
 
 
 
+function highlightColor(color){
+    if (color == "B"){
+        document.getElementById("blackLabel").classList.add("bold");
+        document.getElementById("whiteLabel").classList.remove("bold");
+    } else {
+        document.getElementById("whiteLabel").classList.add("bold");
+        document.getElementById("blackLabel").classList.remove("bold");
+    }
+}
 
 
 
-
-
+function verifyMoveCount(board){
+    return board.movecount == document.documentElement.getAttribute("movecount");
+}
 
 window.onload = MAIN;
 

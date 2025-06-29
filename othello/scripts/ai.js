@@ -51,12 +51,22 @@ function getAttackDimensions(cell){
 
 async function computerMove(board){
 
-    if (board.possibleCells.length == 0) return board;
+    if (board.possibleCells.length == 0) {
+        updateBoard(board);
+        return;
+    }
 
 
     let cell = board.colorToMove == "B" ? randomBestMove(board.possibleCells) : random(board.possibleCells);
 
     await new Promise(r => setTimeout(r, 50));
+
+    console.log(board.movecount, document.documentElement.getAttribute("movecount"))
+
+    if (board.movecount != document.documentElement.getAttribute("movecount")) {
+        console.log("Discrepancy in move count");
+        throw Error("oops");
+    }
 
     makeMove(board, cell.x, cell.y);
 
