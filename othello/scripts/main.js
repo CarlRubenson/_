@@ -14,9 +14,13 @@ const INIT_FUNCTION = (gridTemplate) => {
         "grid": grid,
         "debug": false,
         "guidedMode": true,
-        "gameEnded": false,
+        "endcounter": 0,
         "scoreBoxes": document.querySelectorAll('.infospan.left'),
-        "el": gridElement
+        "el": gridElement,
+        "possibleCells": [],
+        "movecount": 0,
+        "history": [],
+        "computerColor": "B"
     };
 
     // Delete old game
@@ -25,6 +29,9 @@ const INIT_FUNCTION = (gridTemplate) => {
     }
     infoText("");  // Clear winner
     if (!board.guidedMode) gridElement.setAttribute("unguided", "");
+    if (!board.debug) {
+        document.querySelectorAll(".debugitem").forEach((el) => el.classList.add("hidden"));
+    }
 
 
     // Set cell size. Nr cells = cells + numbered labels; widtch based on height divided by nr cells + subtracted of the gap
@@ -51,6 +58,8 @@ const INIT_FUNCTION = (gridTemplate) => {
             const gtCell = gridTemplate[y][x];
             const cellObj = { 
                 "el": null,
+                "x": x,
+                "y": y,
                 "disabled": false, 
                 "possible": false,
                 "color": "E"
@@ -108,7 +117,7 @@ const INIT_FUNCTION = (gridTemplate) => {
         }
     }
     
-    return updateBoard(board);
+    updateBoard(board);
 }
 
 
@@ -120,8 +129,9 @@ function printBoard(grid, type = "color"){
 }
 
 
-function updateBoard(board){
-    let possibleCells = 0;
+async function updateBoard(board){
+    console.log(board.movecount++);
+    board.possibleCells = [];
     for (let y = 0; y < board.maxY; y++) {
         for (let x = 0; x < board.maxX; x++) {
             const cell = board.grid[y][x];
@@ -142,7 +152,7 @@ function updateBoard(board){
                 case "E":
                     cell.pd = possibleDirections(cell, board.colorToMove);
                     if (cell.pd.includes(true)) { 
-                        possibleCells++;
+                        board.possibleCells.push(cell);
                         cell.possible = true 
                         cell.el.className = "cell empty possible";
                     }
@@ -154,14 +164,7 @@ function updateBoard(board){
                 default:
                     cell.el.classList.add('empty', 'impossible');
             }
-
-            //getAttackDimensions(cell);
         }
-    }
-
-    if (possibleCells == 0 && !board.gameEnded) {
-        board.gameEnded = true;
-        endGameMessage(board);
     }
 
     if (board.colorToMove == "B"){
@@ -179,10 +182,34 @@ function updateBoard(board){
     if (board.debug) printBoard(board.grid, "obj");
 
     countPieces(board);
+    scorePieces(board);
 
 
+    if (board.possibleCells.length == 0) {
+        if (board.endcounter == 0){
+            board.endcounter = 1;   // One player can't move
+            board.colorToMove = board.colorToMove == "B" ? "W" : "B";
+        } else if (board.endcounter == 1) {
+            board.endcounter = 2;   // Neither player can't move
+            endGameMessage(board);
+        }
+    } else {
+        board.endcounter = 0;
+    }
 
-    return board;
+
+    board.history.push(board);
+    if (board.history.length > 10) board.history.pop(); 
+    console.log(board.history);
+
+    if (board.computerColor == board.colorToMove || board.computerColor == "both") {
+        document.documentElement.style.pointerEvents = "none"; 
+        let tmp = document.documentElement.style.getPropertyValue('--bgColor');
+        document.documentElement.style.setProperty('--boardColor', 'grey');
+        await computerMove(board);
+        document.documentElement.style.setProperty('--boardColor', tmp);
+        document.documentElement.style.pointerEvents = "";
+    }
 }
 
 function makeMove(board, x, y){
@@ -196,11 +223,8 @@ function makeMove(board, x, y){
         board.grid = flip(cell.neighbors[i], board.grid, board.colorToMove, i);
     }
     board.colorToMove = board.colorToMove == "B" ? "W" : "B";
-    boardHistory.push(
-        updateBoard(board)
-    );
-    console.log(boardHistory);
-    return board;
+    
+    updateBoard(board)
 }
 
 
@@ -260,9 +284,9 @@ function countPieces(board){
 }
 
 
-function endGameMessage(board){
+async function endGameMessage(board){
 
-    const pieceCount = countPieces(board);
+    const pieceCount = await countPieces(board);
 
     let str = "";
     if (pieceCount.black > pieceCount.white){

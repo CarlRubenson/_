@@ -115,3 +115,7 @@ body {
     cursor: pointer;
 }
 
+
+.debugitem.hidden {
+    display: none !important;
+}

@@ -1,37 +1,34 @@
 function scorePieces(board){
+    let weightedValues = [20, 5, 3, 2, 1];
 
-    let blackBricks = 0;
-    let whiteBricks = 0;
-    let emptyCells = 0;
+    let blackScore = 0;
+    let whiteScore = 0;
     for (let y = 0; y < board.maxY; y++) {
         for (let x = 0; x < board.maxX; x++) {
             const cell = board.grid[y][x];
             if (cell.disabled) continue;
             switch (cell.color) {
                 case "B":
-                    cell
-                    blackBricks++;
+                    blackScore += weightedValues[getAttackDimensions(cell)];
                     break;
                 case "W":
-                    whiteBricks++;
-                    break;
-                case "E":
-                    emptyCells++;
+                    whiteScore += weightedValues[getAttackDimensions(cell)];
                     break;
                 default:
-                    // Nothing
+                    continue;
             }
         }
     }
 
-    board.scoreBoxes[0].textContent = blackBricks;
-    board.scoreBoxes[1].textContent = whiteBricks;
-    board.scoreBoxes[2].textContent = emptyCells;
+
+    if (board.debug){
+        document.getElementById("bsInfo").textContent = blackScore;
+        document.getElementById("wsInfo").textContent = whiteScore;
+    }
 
     return {
-        "black": blackBricks,
-        "white": whiteBricks,
-        "empty": emptyCells
+        "black": blackScore,
+        "white": whiteScore
     }
 }
 
@@ -45,9 +42,22 @@ function getAttackDimensions(cell){
         }
     }
 
-    const dyes = ["#F00", "#FC0", "#FF0", "#0F0"];
+/*     const dyes = ["#F00", "#FC0", "#FF0", "#0F0"];
+    cell.el.style.backgroundColor = dyes[attackDimensions]; */
 
-    cell.el.style.backgroundColor = dyes[attackDimensions];
-    cell.el.textContent = attackDimensions;
-    console.log(attackDimensions);
+    return attackDimensions;
+}
+
+
+async function computerMove(board){
+
+    if (board.possibleCells.length == 0) return board;
+
+    let move = Math.floor(Math.random() * board.possibleCells.length);
+    let cell = board.possibleCells[move];
+
+    await new Promise(r => setTimeout(r, 1000));
+
+    makeMove(board, cell.x, cell.y);
+
 }
