@@ -1,0 +1,16 @@
+:root{
+	--sm: 0, 0, 0;
+}
+
+
+.othello {
+	background-color: #000000;
+	background-image: repeating-linear-gradient(
+		-45deg,
+		#cccccc,
+		#eeeeee 30px,
+		#cccccc 30px,
+		#eeeeee 60px);
+	color: rgb(var(--sm));
+	text-shadow: 0px 0px 10px #fff;
+}

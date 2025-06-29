@@ -1,0 +1,61 @@
+html{
+	background: black;
+	text-align: center;
+
+}
+
+div {
+	user-select: none;
+}
+
+#grid {
+	display: grid;
+	grid-template-rows: repeat(auto-fill, 1fr); 
+	grid-gap: 10px;
+	background-color: #252525;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.box {
+	padding: 30px 0;
+	font-size: 80px;
+	opacity: 0.8;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.box:hover {
+	opacity: 1;
+	background-color: white !important;
+}
+
+@media only screen and (min-width: 1390px) {
+	#grid {
+		grid-template-columns: repeat(5, 1fr); 
+		grid-gap: 12px;
+	}
+	
+	.box {
+		font-size: 40px;
+		border-radius: 10px;
+	}	
+
+	.other {
+		display:block !important;
+		background: none !important;
+	}
+
+	.other:hover {
+		color: gray;
+		background: none !important;
+	}
+
+	.hidden {display: none;}
+	.shown {display: block;}
+
+}
+
+.other {
+	display: none;
+}

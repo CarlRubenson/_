@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <base href="../othello/">
+        <link rel="shortcut icon" type="image/png" href="css/img/favicon.png">
+        <title>CrOthello</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script src="scripts/main.js"></script>
+    </head>
+    <body>
+        <div id="infopanel" class="sidepanel">
+            <h1></h1>
+            <p>
+                <span class="infospan right">Svart:</span><span class="infospan left" id="blackInfo">score</span><br />
+                <span class="infospan right">  Vit:</span><span class="infospan left" id="whiteInfo">score</span><br />
+                <span class="infospan right">Tomma:</span><span class="infospan left" id="emptyInfo">score</span><br />
+            </p>
+        </div>
+
+        <div class="grid" id="grid"></div> 
+
+
+        <div id="controls" class="sidepanel">
+            <button id="newGame">New game</button>
+            <button id="cycleTypes">Cycle boards</button>
+            <button id="toggleGuided" onclick="toggleGuidedMode()">Toggle guided</button>
+        </div>
+
+
+    </body>
+</html>
