@@ -28,7 +28,7 @@ const INIT_FUNCTION = (gridTemplate) => {
 
 
     // Set cell size. Nr cells = cells + numbered labels; widtch based on height divided by nr cells + subtracted of the gap
-    document.documentElement.style.setProperty('--gridCells', `${maxWidth + 1}`);
+    document.documentElement.style.setProperty('--gridCells', `${maxWidth}`);
 
     // Create grid
     for (let y = -1; y < maxHeight; y++) {
