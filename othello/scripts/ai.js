@@ -56,17 +56,9 @@ async function computerMove(board){
         return;
     }
 
-
     let cell = board.colorToMove == "B" ? randomBestMove(board.possibleCells) : random(board.possibleCells);
 
     await new Promise(r => setTimeout(r, 50));
-
-    console.log(board.movecount, document.documentElement.getAttribute("movecount"))
-
-    if (board.movecount != document.documentElement.getAttribute("movecount")) {
-        console.log("Discrepancy in move count");
-        throw Error("oops");
-    }
 
     makeMove(board, cell.x, cell.y);
 

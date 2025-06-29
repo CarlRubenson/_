@@ -132,7 +132,6 @@ function printBoard(grid, type = "color"){
 
 async function updateBoard(board){
     console.log(board.movecount++);
-    document.documentElement.setAttribute("movecount", board.movecount);
 
     if (document.documentElement.getAttribute("endcounter") == 2) {
         return console.log("Prevented ending loop");
@@ -187,8 +186,6 @@ async function updateBoard(board){
 
     countPieces(board);
     scorePieces(board);
-
-    console.log(verifyMoveCount(board));
 
     if (board.possibleCells.length == 0) {
         if (board.endcounter == 0){
@@ -366,12 +363,6 @@ function highlightColor(color){
         document.getElementById("whiteLabel").classList.add("bold");
         document.getElementById("blackLabel").classList.remove("bold");
     }
-}
-
-
-
-function verifyMoveCount(board){
-    return board.movecount == document.documentElement.getAttribute("movecount");
 }
 
 window.onload = MAIN;
