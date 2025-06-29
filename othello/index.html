@@ -4,13 +4,17 @@
         <link rel="shortcut icon" type="image/png" href="css/img/favicon.png">
         <title>CrOthello</title>
         <link rel="stylesheet" href="css/style.css">
-        <script src="scripts/main.js"></script>
+        <link rel="stylesheet" href="css/board.css">
+        <link rel="stylesheet" href="css/colors.css">
+        <script src="scripts/boardTemplates.js"></script>
         <script src="scripts/domInteractions.js"></script>
+        <script src="scripts/main.js"></script>
+        
     </head>
     <body>
         <div id="infopanel" class="sidepanel">
             <h1></h1>
-            <p>
+            <p id="scores">
                 <span class="infospan right">Svart:</span><span class="infospan left" id="blackInfo">score</span><br />
                 <span class="infospan right">  Vit:</span><span class="infospan left" id="whiteInfo">score</span><br />
                 <span class="infospan right">Tomma:</span><span class="infospan left" id="emptyInfo">score</span><br />
@@ -24,6 +28,7 @@
             <button id="newGame">New game</button>
             <button id="cycleTypes">Cycle boards</button>
             <button id="toggleGuided" onclick="toggleGuidedMode()">Toggle guided</button>
+            <button id="hideScores" onclick="toggleScores()">Toggle scores</button>
         </div>
 
 

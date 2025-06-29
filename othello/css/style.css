@@ -1,159 +1,28 @@
-:root {
-    --bgColor: #f0f0f0;
-    --boardColor: #083;
-    --blackColor: #000;
-    --whiteColor: #fff;
-    --highlightColor: var(--blackColor);
-    --markerSize: calc( 100vh / 15 );
-    --cellSize: calc( var(--markerSize) * 1.25 );
-    --highlightRotation: rotateY(0deg);
-}
+
 
 
 body {
-    display: flex;
+    display: grid;
+    grid-template-columns: calc( var(--cellSize) * 2 ) 1fr calc( var(--cellSize) * 2 );
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     background-color: var(--bgColor);
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(8, var(--cellSize));
-    grid-template-rows: repeat(8, var(--cellSize));
-    gap: min(5px, calc( var(--cellSize) / 10 ));
+    padding: 0 50px 0 50px;
 }
 
 
 
-
-.cell {
-    width: 100%;
-    height: 100%;
-    background-color: var(--boardColor);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.cell.disabled {
-    background-color: var(--bgColor);
-}
-
-
-
-
-
-
-/*  Marker pieces */
-
-.marker {
-    width: var(--markerSize);
-    height: var(--markerSize);
-    border-radius: 50%;
-    box-shadow: none;
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
-    position: relative;
-}
-
-.cell.black > .marker::before,
-.cell.white > .marker::before,
-.cell.black > .marker::after,
-.cell.white > .marker::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  backface-visibility: hidden;
-  transition: background-color 0.3s;
-}
-
-.cell.black > .marker::before,
-.cell.white > .marker::before {
-  background-color: var(--blackColor);
-  transform: rotateY(0deg);
-}
-
-.cell.black > .marker::after,
-.cell.white > .marker::after {
-  background-color: var(--whiteColor);
-  transform: rotateY(180deg);
-}
-
-.cell.black > .marker {
-  transform: rotateY(0deg);
-}
-
-.cell.white > .marker {
-  transform: rotateY(180deg);
-}
-
-.cell.cell.empty > .marker {
-  transform: var(--highlightRotation);
-}
-
-#grid:not([unguided]) > .cell.empty.impossible > .marker {
-    display: none;
-}
-
-#grid:not([unguided]) > .cell.empty.possible > .marker {
-    box-shadow: 0px 0px 10px var(--highlightColor);
-    opacity: 50%;
-}
-
-.cell.empty:hover > .marker {
-    box-shadow: 0px 0px 10px var(--highlightColor);
-    background-color: var(--highlightColor);
-    opacity: 40%;
-}
-
-.cell.disabled > .marker {
-    display: none;
-}
-
-
-
-
-/* Labels and indicators */
-
-.label {
-    text-align: center;
-    line-height: var(--cellSize);
-    opacity: 0.5;
-}
-
-.indicator {
-    width: calc( var(--markerSize) / 2);
-    height: calc( var(--markerSize) / 2);
-    position: relative;
-    left: calc( var(--cellSize) / 2.5 );
-    top: calc( var(--cellSize) / 2.5 );
-    border-radius: 50%;
-}
-
-.indicator.black {
-    background-color: var(--blackColor);
-    box-shadow: 0px 0px 2px var(--whiteColor);
-}
-
-.indicator.white {
-    background-color: var(--whiteColor);
-    box-shadow: 0px 0px 2px var(--blackColor);
-}
 
 
 /* Info */
 
 .sidepanel {
-    width: calc( var(--cellSize) * 2 );
+    width: 100%;
     height: calc( var(--cellSize) * 2 );
     display: grid;
-    border: 1px solid black;
+    border: 1px solid var(--blackColor);
     border-radius: 10%;
     margin: 5%;
     padding: 20px;
@@ -169,6 +38,7 @@ body {
 #infopanel {
     opacity: 100%;
     border: none;
+    justify-self: left;
 }
 
 #infopanel > h1 {
@@ -176,21 +46,25 @@ body {
     border: none;
 }
 
-#infopanel > p {
+#infopanel > #scores {
     display: grid;
     grid-template-columns: 1fr 1fr 0;
 }
 
-.infospan {
+#infopanel > #scores[hidden] {
+    display: none;
+}
+
+#scores > .infospan {
     width: 100%;
     display: inline-block;
 }
 
-.infospan.right {
+#scores > .infospan.right {
     text-align: end;
 }
 
-.infospan.left {
+#scores > .infospan.left {
     text-align: start;
     padding-left: 5px;
 }
@@ -198,8 +72,7 @@ body {
 /* CONTROLS */
 
 #controls.sidepanel {
-    width: calc( var(--cellSize) * 2 );
-    height: calc( var(--cellSize) * 2 );
+    justify-self: right;
 }
 
 #controls > button {

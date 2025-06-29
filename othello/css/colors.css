@@ -1,0 +1,11 @@
+:root {
+    --bgColor: #f0f0f0;
+    --boardColor: #083;
+    --blackColor: #000;
+    --whiteColor: #fff;
+    --highlightColor: var(--blackColor);
+    
+    --markerSize: calc( 100vh / 15 );
+    --cellSize: calc( var(--markerSize) * 1.25 );
+    --highlightRotation: rotateY(0deg);
+}
