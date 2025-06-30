@@ -13,11 +13,10 @@
         <script>
             let defaults = {
                 "debug": false,
+                "showScores": false,
                 "guidedMode": true,
-                "computerColor": null,
                 "computerTimeout": 500,
-                "computerModeB": "randomBest",
-                "computerModeW": "random"
+                "dye": "computerMove"
             }
         </script>
         
@@ -25,7 +24,7 @@
     <body>
         <div id="infopanel" class="sidepanel">
             <h1></h1>
-            <p id="scores">
+            <p id="scores" hidden>
                 <span class="infospan right" id="blackLabel">Svart</span><span class="infospan left hideable" id="blackInfo">---</span><br />
                 <span class="infospan right" id="whiteLabel">  Vit</span><span class="infospan left hideable" id="whiteInfo">---</span><br />
                 <span class="infospan right hideable">Tomma</span><span class="infospan left hideable" id="emptyInfo">---</span><br />
@@ -38,11 +37,30 @@
 
 
         <div id="controls" class="sidepanel">
-            <button id="newGame">New game</button>
-            <button id="cycleTypes">Cycle boards</button>
-            <button id="toggleGuided" onclick="toggleGuidedMode()">Toggle guided</button>
-            <button id="hideScores" onclick="toggleScores()">Toggle scores</button>
-            <button id="activateGame" onclick="toggleActiveGame()">Activate game</button>
+            <button id="newGame" class="controlButton">New game</button>
+            <select id="boardTemplate" class="controlButton">
+                <option value="basic">Basic</option>
+                <option value="octagon">Octagon</option>
+                <option value="jumbo">16x16</option>
+                <option value="stripedBorders">Dotted borders</option>
+                <option value="h">H</option>
+                <option value="x">X</option>
+            </select>
+            <button id="toggleGuided" class="controlButton" onclick="toggleGuidedMode()">Toggle guided</button>
+            <div>
+                <button id="hideScores" class="controlButton" onclick="toggleScores()">Toggle scores</button>
+                <button id="hideScores" class="controlButton" onclick="toggleNumbers()">Toggle numbers</button>
+            </div>
+            <select id="blackPieces" class="controlButton">
+                <option value="human">Human</option>
+                <option value="random">Random</option>
+                <option value="randomBest">RandomBest</option>
+            </select>
+            <select id="whitePieces" class="controlButton">
+                <option value="human">Human</option>
+                <option value="random">Random</option>
+                <option value="randomBest">RandomBest</option>
+            </select>
         </div>
 
     </body>

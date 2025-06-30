@@ -9,4 +9,7 @@
     --cellSize: calc( var(--markerSize) * 1.25 );
     --gridCells: 8;
     --highlightRotation: rotateY(0deg);
+
+    --numbersDisplay: flex;
+    --numbersSpacer: 1;
 }

@@ -1,13 +1,12 @@
 .grid {
     display: grid;
-    grid-template-columns: repeat( calc( var(--gridCells) + 1), 1fr);
-    grid-template-rows: repeat( calc( var(--gridCells) + 1), 1fr);
+    grid-template-columns: repeat( calc( var(--gridCells) + var(--numbersSpacer)), 1fr);
     aspect-ratio: 1 / 1;
     gap: min(5px, 1%);
     align-items: center;
     justify-items: center;
-    height: 96%;
-    margin: 2%;
+    height: 96vh;
+    margin: 2vh;
     width: auto;
 }
 
@@ -20,6 +19,7 @@
     cursor: pointer;
     aspect-ratio: 1 / 1;
     height: auto;
+    box-sizing: border-box;
 }
 
 .cell.disabled {
@@ -109,7 +109,11 @@
 /* Labels and indicators */
 
 .label {
-    text-align: center;
-    line-height: var(--cellSize);
-    opacity: 0.5;
+  justify-content: center;
+  align-items: center;
+  display: var(--numbersDisplay);
+  opacity: 0.5;
+  height: auto;
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }

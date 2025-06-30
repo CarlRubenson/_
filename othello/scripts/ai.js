@@ -41,10 +41,7 @@ function getAttackDimensions(cell){
             attackDimensions++;
         }
     }
-
-/*     const dyes = ["#F00", "#FC0", "#FF0", "#0F0"];
-    cell.el.style.backgroundColor = dyes[attackDimensions]; */
-
+    
     return attackDimensions;
 }
 
@@ -62,7 +59,7 @@ async function computerMove(board){
     }
 
 
-    let cell = board.colorToMove == "B" ? moveTypes[defaults.computerModeB](board.possibleCells) : moveTypes[defaults.computerModeW](board.possibleCells);
+    let cell = moveTypes[board[board.colorToMove]](board.possibleCells);
 
     await new Promise(r => setTimeout(r, defaults.computerTimeout));
 

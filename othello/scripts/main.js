@@ -20,7 +20,8 @@ const INIT_FUNCTION = (gridTemplate) => {
         "possibleCells": [],
         "movecount": 0,
         "history": [],
-        "computerColor": defaults.computerColor
+        "B": document.getElementById("blackPieces").value,
+        "W": document.getElementById("whitePieces").value
     };
 
     // Delete old game
@@ -187,6 +188,8 @@ async function updateBoard(board){
     countPieces(board);
     scorePieces(board);
 
+    if (defaults.dye == "attackDimensions") dyeBoard(board, "border", "attackDimensions")
+
     if (board.possibleCells.length == 0) {
         if (board.endcounter == 0){
             board.endcounter = 1;   // One player can't move
@@ -211,12 +214,18 @@ async function updateBoard(board){
 /*     board.history.push(board);
     if (board.history.length > 10) board.history.pop(); 
  */
-    if (activeGame() && (board.computerColor == board.colorToMove || board.computerColor == "both")) {
+    if (activeGame() && board[board.colorToMove] != "human") {
         document.documentElement.style.pointerEvents = "none"; 
-        let tmp = document.documentElement.style.getPropertyValue('--bgColor');
-        document.documentElement.style.setProperty('--boardColor', 'grey');
-        await computerMove(board);
-        document.documentElement.style.setProperty('--boardColor', tmp);
+        if (defaults.dye == "computerMove"){
+            let tmp = document.documentElement.style.getPropertyValue('--bgColor');
+            document.documentElement.style.setProperty('--boardColor', 'grey');
+            await computerMove(board);
+            document.documentElement.style.setProperty('--boardColor', tmp);
+        } else {
+            await computerMove(board);
+        }
+
+
         document.documentElement.style.pointerEvents = "";
     }
 }
@@ -331,30 +340,6 @@ function infoText(str){
     infopanel.getElementsByTagName("h1")[0].textContent = str;
 }
 
-const MAIN = () => {
-
-    let boardIndex = 0;
-    let templates = Object.values(boardTemplates);
-
-    INIT_FUNCTION( templates[0] );
-
-    document.getElementById("newGame").addEventListener("click", () => {
-        toggleActiveGame(false);
-        INIT_FUNCTION( templates[boardIndex] );
-    } );
-    document.getElementById("cycleTypes").addEventListener("click", (e) => {
-        toggleActiveGame(false);
-        if (e.shiftKey) {
-            if (--boardIndex == -1 ) boardIndex = templates.length - 1;
-        } else if (++boardIndex == templates.length ) {
-            boardIndex = 0;
-        }
-        INIT_FUNCTION( templates[boardIndex] );
-    });
-    
-}
-
-
 
 function highlightColor(color){
     if (color == "B"){
@@ -365,6 +350,65 @@ function highlightColor(color){
         document.getElementById("blackLabel").classList.remove("bold");
     }
 }
+
+function dyeBoard(board, mode = "background", dye){
+    let dyes = [dye];
+
+    if (dye == "attackDimensions"){
+        dyes = ["#F00", "#FC0", "#FF0", "#0F0"];
+        
+    }
+
+    for (let y = 0; y < board.maxY; y++){
+        for (let x = 0; x < board.maxX; x++){
+            const cell = board.grid[y][x];
+            if (cell.disabled) continue;
+
+            switch (mode){
+                case "both":
+                    cell.el.style.backgroundColor = dyes[ Math.min(dyes.length, getAttackDimensions(cell))];
+                case "border":
+                    cell.el.style.border = `${dyes[ Math.min(dyes.length, getAttackDimensions(cell))]} 3px dashed`;
+                    break;
+                case "clear":
+                    cell.el.style.backgroundColor = "";
+                    cell.el.style.border = "";
+                default:
+                    cell.el.style.backgroundColor = dyes[ Math.min(dyes.length, getAttackDimensions(cell))];
+            }
+        }
+    }
+}
+
+
+const MAIN = () => {
+
+    if (defaults.showScores) toggleScores();
+
+    INIT_FUNCTION( boardTemplates[document.getElementById("boardTemplate").value] );
+
+    document.getElementById("newGame").addEventListener("click", () => {
+        toggleActiveGame(false);
+        INIT_FUNCTION( boardTemplates[document.getElementById("boardTemplate").value] );
+    } );
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 window.onload = MAIN;
 

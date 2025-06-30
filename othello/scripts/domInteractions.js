@@ -16,9 +16,24 @@ function toggleActiveGame(activate = null, board){
     if (!activate) document.body.removeAttribute("gameActive");
     else {
         document.body.setAttribute("gameActive", "active");
-        if (board && (board.computerColor == board.colorToMove || board.computerColor == "both")) computerMove(board);
+        if (board && board[board.colorToMove] != "human") computerMove(board);
     }
 }
+
+
+function toggleNumbers(){
+    const current = document.documentElement.style.getPropertyValue("--numbersDisplay") || getComputedStyle(document.documentElement).getPropertyValue("--numbersDisplay");
+    const newDisp = current == "flex" ? "none" : "flex";
+
+    if (current == "flex"){
+        document.documentElement.style.setProperty('--numbersDisplay', `none`);
+        document.documentElement.style.setProperty('--numbersSpacer', `0`);
+    } else {
+        document.documentElement.style.setProperty('--numbersDisplay', `none`);
+        document.documentElement.style.setProperty('--numbersSpacer', `0`);
+    }
+}
+
 
 function activeGame(){
     return !!document.body.getAttribute("gameActive");

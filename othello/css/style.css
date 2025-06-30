@@ -5,6 +5,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-around;
     height: 100vh;
     background-color: var(--bgColor);
     margin: 0;
@@ -12,6 +13,11 @@ body {
 
 
 @media only screen and (max-width: 1390px) {
+    :root {
+        --numbersDisplay: none !important;
+        --numbersSpacer: 0 !important;
+    }
+    
 	body {
         display: grid;
         grid-template-areas: "a a" "b c";
@@ -20,16 +26,10 @@ body {
     }
 
     body > .grid {
-        grid-template-columns: repeat( var(--gridCells), 1fr);
-        grid-template-rows: repeat( var(--gridCells), 1fr);
         grid-area: a;
-        width: 98%;
-        margin: 1%;
+        width: 98vw;
+        margin: 1vw;
         height: auto;
-    }
-
-    .grid > .label {
-        display: none;
     }
 
     #infopanel {
@@ -51,7 +51,6 @@ body {
     display: grid;
     border: 1px solid var(--blackColor);
     border-radius: 10%;
-    margin: 5%;
     padding: 20px;
     text-align: center;
     opacity: 25%;
@@ -70,7 +69,6 @@ body {
 #infopanel {
     opacity: 100%;
     border: none;
-    justify-self: left;
 }
 
 #infopanel > h1 {
@@ -107,15 +105,35 @@ body {
 
 /* CONTROLS */
 
-#controls.sidepanel {
-    justify-self: right;
+#controls {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
 }
 
-#controls > button {
+#controls > div {
+    display: flex;
+    gap: 2px;
+}
+
+#controls > .controlButton {
     cursor: pointer;
+    border: #0005 1px solid;
+    border-radius: 10px;
 }
 
 
 .debugitem.hidden {
     display: none !important;
+}
+
+
+#blackPieces {
+    background: var(--blackColor);
+    color: var(--whiteColor);
+
+}
+
+#whitePieces {
+    background: var(--whiteColor);
+    color: var(--blackColor);
 }
