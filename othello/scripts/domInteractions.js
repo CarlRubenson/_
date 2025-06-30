@@ -16,7 +16,7 @@ function toggleActiveGame(activate = null, board){
     if (!activate) document.body.removeAttribute("gameActive");
     else {
         document.body.setAttribute("gameActive", "active");
-        if (board && board[board.colorToMove] != "human") computerMove(board);
+        if (board && board[board.colorToMove] != "Human") computerMove(board);
     }
 }
 

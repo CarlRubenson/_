@@ -1,6 +1,8 @@
 const INIT_FUNCTION = (gridTemplate) => {
     'use strict';
 
+    console.log(gridTemplate)
+
     const grid = [];
     const maxWidth = Math.max(...gridTemplate.map(array => array.length));
     const maxHeight = gridTemplate.length;
@@ -219,7 +221,7 @@ async function updateBoard(board){
 /*     board.history.push(board);
     if (board.history.length > 10) board.history.pop(); 
  */
-    if (activeGame() && board[board.colorToMove] != "human") {
+    if (activeGame() && board[board.colorToMove] != "Human") {
         document.documentElement.style.pointerEvents = "none"; 
         if (defaults.dye == "computerMove"){
             let tmp = document.documentElement.style.getPropertyValue('--bgColor');
@@ -390,12 +392,34 @@ const MAIN = () => {
     if (defaults.showScores) toggleScores();
     if (defaults.showScores) toggleNumbers();
 
+    // Populate dropdowns
+    Object.keys(aiType).forEach( (name) => {        
+        if (["Human", "Random", "Random Edge", "Random Center"].includes(name)) return; // Defined in html file (needed to make browser remember last selection across reloads)
+        const el = document.createElement("option");
+        el.setAttribute("value", name);
+        el.textContent = name;
+
+        document.getElementById("blackPieces").appendChild(el);
+        document.getElementById("whitePieces").appendChild(el.cloneNode(true));
+    })
+    Object.keys(boardTemplates).forEach( (name) => {
+        if (["Basic", "Octagon", "Jumbo", "H", "X", "Dotted Edges", "Diamond", "Mini", "Micro"].includes(name)) return; // Defined in html file (needed to make browser remember last selection across reloads)
+        const el = document.createElement("option");
+        el.setAttribute("value", name);
+        el.textContent = name;
+
+        document.getElementById("boardTemplate").appendChild(el);
+    })
+
+    console.log(document.getElementById("boardTemplate").value)
+
+
     INIT_FUNCTION( boardTemplates[document.getElementById("boardTemplate").value] );
 
     document.getElementById("newGame").addEventListener("click", () => {
-        toggleActiveGame(false);
         document.getElementById("newGame").removeAttribute("highlight");
         INIT_FUNCTION( boardTemplates[document.getElementById("boardTemplate").value] );
+        toggleActiveGame(true);
     } );
     
 }

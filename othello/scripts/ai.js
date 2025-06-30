@@ -53,37 +53,10 @@ async function computerMove(board){
         return;
     }
 
-    const moveTypes = {
-        "randomBest": randomBestMove,
-        "random": randomMove
-    }
-
-
-    let cell = moveTypes[board[board.colorToMove]](board.possibleCells);
-
-    await new Promise(r => setTimeout(r, defaults.computerTimeout));
+    let cell = aiType[board[board.colorToMove]](board.possibleCells);
+    
+    await new Promise(r => setTimeout(r, aiSpeed.max - aiSpeed.value));
 
     makeMove(board, cell.x, cell.y);
 
-}
-
-// Will just select a random possible move
-function randomMove(possibleCells){
-    let move = Math.floor(Math.random() * possibleCells.length);
-    return possibleCells[move];
-}
-
-
-// Will sort possible moves by attack dimensions and pick a random one of the best ones at the moment
-function randomBestMove(possibleCells){
-    let sortedPossible = possibleCells.map(cell => {
-        return [getAttackDimensions(cell), cell];
-    });
-
-    sortedPossible.sort((a,b) => {
-        if (a[0] == b[0]) return Math.random() - 0.5;
-        else return a[0] - b[0];
-    })
-
-    return sortedPossible[0][1];
 }
