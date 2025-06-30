@@ -12,15 +12,15 @@ const INIT_FUNCTION = (gridTemplate) => {
         "maxX": maxWidth,
         "colorToMove": "B",
         "grid": grid,
-        "debug": false,
-        "guidedMode": true,
+        "debug": defaults.debug,
+        "guidedMode": defaults.guidedMode,
         "endcounter": 0,
         "scoreBoxes": document.querySelectorAll('.infospan.left'),
         "el": gridElement,
         "possibleCells": [],
         "movecount": 0,
         "history": [],
-        "computerColor": null
+        "computerColor": defaults.computerColor
     };
 
     // Delete old game

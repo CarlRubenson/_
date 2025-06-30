@@ -56,16 +56,22 @@ async function computerMove(board){
         return;
     }
 
-    let cell = board.colorToMove == "B" ? randomBestMove(board.possibleCells) : random(board.possibleCells);
+    const moveTypes = {
+        "randomBest": randomBestMove,
+        "random": randomMove
+    }
 
-    await new Promise(r => setTimeout(r, 50));
+
+    let cell = board.colorToMove == "B" ? moveTypes[defaults.computerModeB](board.possibleCells) : moveTypes[defaults.computerModeW](board.possibleCells);
+
+    await new Promise(r => setTimeout(r, defaults.computerTimeout));
 
     makeMove(board, cell.x, cell.y);
 
 }
 
 // Will just select a random possible move
-function random(possibleCells){
+function randomMove(possibleCells){
     let move = Math.floor(Math.random() * possibleCells.length);
     return possibleCells[move];
 }
