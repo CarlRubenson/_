@@ -20,7 +20,7 @@ const INIT_FUNCTION = (gridTemplate) => {
         "possibleCells": [],
         "movecount": 0,
         "history": [],
-        "computerColor": "both"
+        "computerColor": null
     };
 
     // Delete old game
