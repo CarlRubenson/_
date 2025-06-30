@@ -30,10 +30,7 @@
     box-shadow: 
       inset var(--gridBorders) var(--gridBorders) 0 0 var(--blackColor),                  /* NW & SE borders inside*/
       inset var(--inverseGridBorders) var(--inverseGridBorders) 0 0 var(--blackColor),
-      var(--gridBorders) var(--gridBorders) 0 0 var(--blackColor),                        /* Outside borders to fix corner pieces*/
-      var(--inverseGridBorders) var(--inverseGridBorders) 0 0 var(--blackColor),
-      var(--gridBorders) var(--inverseGridBorders) 0 0 var(--blackColor),
-      var(--inverseGridBorders) var(--gridBorders) 0 0 var(--blackColor);
+      0 0 0 var(--gridBorders) var(--blackColor);                        /* Outside borders to fix outsides and corners*/
 }
 
 .cell.disabled {
