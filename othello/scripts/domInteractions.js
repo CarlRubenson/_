@@ -23,14 +23,13 @@ function toggleActiveGame(activate = null, board){
 
 function toggleNumbers(){
     const current = document.documentElement.style.getPropertyValue("--numbersDisplay") || getComputedStyle(document.documentElement).getPropertyValue("--numbersDisplay");
-    const newDisp = current == "flex" ? "none" : "flex";
 
     if (current == "flex"){
-        document.documentElement.style.setProperty('--numbersDisplay', `none`);
-        document.documentElement.style.setProperty('--numbersSpacer', `0`);
+        document.documentElement.style.setProperty("--numbersDisplay", "none");
+        document.documentElement.style.setProperty("--numbersSpacer", "0");
     } else {
-        document.documentElement.style.setProperty('--numbersDisplay', `none`);
-        document.documentElement.style.setProperty('--numbersSpacer', `0`);
+        document.documentElement.style.setProperty("--numbersDisplay", "flex");
+        document.documentElement.style.setProperty("--numbersSpacer", "1");
     }
 }
 
