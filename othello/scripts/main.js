@@ -192,8 +192,9 @@ async function updateBoard(board){
             board.endcounter = 1;   // One player can't move
             document.documentElement.setAttribute("endcounter", board.endcounter);
             board.colorToMove = board.colorToMove == "B" ? "W" : "B";
+            return updateBoard(board);
         } else if (board.endcounter == 1) {
-            board.endcounter = 2;   // Neither player can't move
+            board.endcounter = 2;   // Neither player can move
             document.documentElement.setAttribute("endcounter", board.endcounter);
             endGameMessage(board);
             toggleActiveGame(false);
