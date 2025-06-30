@@ -75,37 +75,6 @@ const INIT_FUNCTION = (gridTemplate) => {
                 cell.classList.add('disabled');
                 cellObj.color = " "; 
                 cellObj.disabled = true; 
-
-/*                 const neighborDirections = {
-                    "top": (gridTemplate[y-1] && gridTemplate[y-1][x] !== undefined),
-                    "bottom": (gridTemplate[y+1] && gridTemplate[y+1][x] !== undefined),
-                    "right": (gridTemplate[y][x-1] !== undefined),
-                    "left": (gridTemplate[y][x+1] !== undefined)
-                }
-
-                let boxShadowString = "inset ";
-
-                if (!(neighborDirections.top || neighborDirections.bottom || neighborDirections.left || neighborDirections.right)){
-
-                } else if ((neighborDirections.top && neighborDirections.bottom) || (neighborDirections.right && neighborDirections.left)) {
-                    console.log("Let's deal with this later");
-                } else {
-
-                    if (neighborDirections.right) boxShadowString += "var(--gridBorders) ";
-                    else if (neighborDirections.left) boxShadowString += "var(--inverseGridBorders) ";
-                    else boxShadowString += "0 ";
-
-                    if (neighborDirections.top) boxShadowString += "var(--gridBorders) ";
-                    else if (neighborDirections.bottom) boxShadowString += "var(--inverseGridBorders) ";
-                    else boxShadowString += "0 ";
-                    
-                    boxShadowString += "0 0 black";
-
-                    console.log(cell, boxShadowString, cell.style);
-                    cell.style.setProperty("box-shadow", boxShadowString, "important")
-                } */
-
-
                 
             }
             else if (gtCell == 1) { cellObj.color = "B"; }
