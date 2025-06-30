@@ -384,6 +384,7 @@ function dyeBoard(board, mode = "background", dye){
 const MAIN = () => {
 
     if (defaults.showScores) toggleScores();
+    if (defaults.showScores) toggleNumbers();
 
     INIT_FUNCTION( boardTemplates[document.getElementById("boardTemplate").value] );
 

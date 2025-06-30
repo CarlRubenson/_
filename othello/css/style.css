@@ -25,21 +25,6 @@ body {
         height: auto;
     }
 
-    body > .grid {
-        grid-area: a;
-        width: 98vw;
-        margin: 1vw;
-        height: auto;
-    }
-
-    #infopanel {
-        grid-area: b;
-    }
-
-    #controls {
-        grid-area: c;
-    }
-
 }
 
 
@@ -69,11 +54,13 @@ body {
 #infopanel {
     opacity: 100%;
     border: none;
+    grid-area: b;
 }
 
 #infopanel > h1 {
     opacity: 100%;
     border: none;
+    font-size: 5svb;
 }
 
 #infopanel > #scores {
@@ -89,6 +76,7 @@ body {
 #scores > .infospan {
     width: 100%;
     display: inline-block;
+    font-size: 4svb;
 }
 
 #scores > .infospan.right {
@@ -108,6 +96,7 @@ body {
 #controls {
     grid-template-columns: repeat(2, 1fr);
     gap: 2px;
+    grid-area: c;
 }
 
 #controls > div {

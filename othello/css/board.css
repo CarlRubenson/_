@@ -5,9 +5,10 @@
     gap: min(5px, 1%);
     align-items: center;
     justify-items: center;
-    height: 96vh;
-    margin: 2vh;
+    height: 96vmin;
+    margin: 2vmin;
     width: auto;
+    grid-area: a;
 }
 
 .cell {

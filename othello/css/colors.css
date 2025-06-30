@@ -10,6 +10,6 @@
     --gridCells: 8;
     --highlightRotation: rotateY(0deg);
 
-    --numbersDisplay: flex;
-    --numbersSpacer: 1;
+    --numbersDisplay: none;
+    --numbersSpacer: 0;
 }
