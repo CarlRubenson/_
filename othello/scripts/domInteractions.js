@@ -37,3 +37,7 @@ function toggleNumbers(){
 function activeGame(){
     return !!document.body.getAttribute("gameActive");
 }
+
+function highlightNewgame(){
+    document.getElementById("newGame").setAttribute("highlight", "");
+}

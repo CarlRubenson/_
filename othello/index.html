@@ -39,7 +39,7 @@
 
         <div id="controls" class="sidepanel">
             <button id="newGame" class="controlButton">New game</button>
-            <select id="boardTemplate" class="controlButton">
+            <select id="boardTemplate" class="controlButton" onchange="highlightNewgame()">
                 <option value="basic">Basic</option>
                 <option value="octagon">Octagon</option>
                 <option value="jumbo">16x16</option>
@@ -47,21 +47,21 @@
                 <option value="h">H</option>
                 <option value="x">X</option>
             </select>
+            <select id="blackPieces" class="controlButton" onchange="highlightNewgame()">
+                <option value="human">Human</option>
+                <option value="random">Random</option>
+                <option value="randomBest">RandomBest</option>
+            </select>
+            <select id="whitePieces" class="controlButton" onchange="highlightNewgame()">
+                <option value="human">Human</option>
+                <option value="random">Random</option>
+                <option value="randomBest">RandomBest</option>
+            </select>
             <button id="toggleGuided" class="controlButton" onclick="toggleGuidedMode()">Toggle guides</button>
             <div>
-                <button id="hideScores" class="controlButton" onclick="toggleScores()">Toggle scores</button>
-                <button id="hideScores" class="controlButton" onclick="toggleNumbers()">Toggle numbers</button>
+                <button class="controlButton" style="font-size: 1svb;" onclick="toggleScores()">Toggle scores</button>
+                <button class="controlButton" style="font-size: 1svb;" onclick="toggleNumbers()">Toggle numbers</button>
             </div>
-            <select id="blackPieces" class="controlButton">
-                <option value="human">Human</option>
-                <option value="random">Random</option>
-                <option value="randomBest">RandomBest</option>
-            </select>
-            <select id="whitePieces" class="controlButton">
-                <option value="human">Human</option>
-                <option value="random">Random</option>
-                <option value="randomBest">RandomBest</option>
-            </select>
         </div>
 
     </body>

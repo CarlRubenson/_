@@ -71,7 +71,43 @@ const INIT_FUNCTION = (gridTemplate) => {
             cell.className = 'cell';
             
 
-            if (gtCell === undefined) { cell.classList.add('disabled'); cellObj.color = " "; cellObj.disabled = true; }
+            if (gtCell === undefined) { 
+                cell.classList.add('disabled');
+                cellObj.color = " "; 
+                cellObj.disabled = true; 
+
+/*                 const neighborDirections = {
+                    "top": (gridTemplate[y-1] && gridTemplate[y-1][x] !== undefined),
+                    "bottom": (gridTemplate[y+1] && gridTemplate[y+1][x] !== undefined),
+                    "right": (gridTemplate[y][x-1] !== undefined),
+                    "left": (gridTemplate[y][x+1] !== undefined)
+                }
+
+                let boxShadowString = "inset ";
+
+                if (!(neighborDirections.top || neighborDirections.bottom || neighborDirections.left || neighborDirections.right)){
+
+                } else if ((neighborDirections.top && neighborDirections.bottom) || (neighborDirections.right && neighborDirections.left)) {
+                    console.log("Let's deal with this later");
+                } else {
+
+                    if (neighborDirections.right) boxShadowString += "var(--gridBorders) ";
+                    else if (neighborDirections.left) boxShadowString += "var(--inverseGridBorders) ";
+                    else boxShadowString += "0 ";
+
+                    if (neighborDirections.top) boxShadowString += "var(--gridBorders) ";
+                    else if (neighborDirections.bottom) boxShadowString += "var(--inverseGridBorders) ";
+                    else boxShadowString += "0 ";
+                    
+                    boxShadowString += "0 0 black";
+
+                    console.log(cell, boxShadowString, cell.style);
+                    cell.style.setProperty("box-shadow", boxShadowString, "important")
+                } */
+
+
+                
+            }
             else if (gtCell == 1) { cellObj.color = "B"; }
             else if (gtCell == 2) {  cellObj.color = "W"; }
             
@@ -199,7 +235,7 @@ async function updateBoard(board){
         } else if (board.endcounter == 1) {
             board.endcounter = 2;   // Neither player can move
             document.documentElement.setAttribute("endcounter", board.endcounter);
-            endGameMessage(board);
+            console.log(endGameMessage(board));
             toggleActiveGame(false);
             return;
         }
@@ -309,12 +345,12 @@ function endGameMessage(board){
     let str = "";
     if (pieceCount.black > pieceCount.white){
         highlightColor("B");
-        infoText("Svart vann!"); 
+        str += infoText("Svart vann!"); 
     } else if (pieceCount.white > pieceCount.black) {
         highlightColor("W");
-        infoText("Vit vann!"); 
+        str += infoText("Vit vann!"); 
     } else {
-        infoText("Oavgjort!"); 
+        str += infoText("Oavgjort!"); 
     }
 
     str = `${str}
@@ -322,8 +358,6 @@ function endGameMessage(board){
 Svarta: ${pieceCount.black}    
 Vita:   ${pieceCount.white}
 (Tomma: ${pieceCount.empty})
-
-Spela igen?
     `
 
     return str;
@@ -338,6 +372,7 @@ function flip(cell, grid, colorToMove, direction){
 
 function infoText(str){
     infopanel.getElementsByTagName("h1")[0].textContent = str;
+    return str;
 }
 
 
@@ -390,6 +425,7 @@ const MAIN = () => {
 
     document.getElementById("newGame").addEventListener("click", () => {
         toggleActiveGame(false);
+        document.getElementById("newGame").removeAttribute("highlight");
         INIT_FUNCTION( boardTemplates[document.getElementById("boardTemplate").value] );
     } );
     

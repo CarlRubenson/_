@@ -23,6 +23,7 @@ body {
         grid-template-areas: "a a" "b c";
         width: 100vw;
         height: auto;
+        flex-direction: unset;
     }
 
 }
@@ -38,11 +39,6 @@ body {
     border-radius: 10%;
     padding: 20px;
     text-align: center;
-    opacity: 25%;
-}
-
-.sidepanel:hover {
-    opacity: 100%;
 }
 
 .bold {
@@ -52,13 +48,11 @@ body {
 
 
 #infopanel {
-    opacity: 100%;
     border: none;
     grid-area: b;
 }
 
 #infopanel > h1 {
-    opacity: 100%;
     border: none;
     font-size: 5svb;
 }
@@ -99,15 +93,33 @@ body {
     grid-area: c;
 }
 
+body[gameActive] #controls {
+    opacity: 25%;
+}
+
+body[gameActive] #controls:hover {
+    opacity: 100%;
+}
+
 #controls > div {
-    display: flex;
+    display: grid;
     gap: 2px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#controls > button[highlight] {
+    background-color: gold;
 }
 
 #controls > .controlButton {
     cursor: pointer;
     border: #0005 1px solid;
     border-radius: 10px;
+    padding: 0;
+}
+
+#controls > .controlButton {
+    text-align: center;
 }
 
 

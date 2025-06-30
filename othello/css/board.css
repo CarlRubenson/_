@@ -1,34 +1,44 @@
 .grid {
     display: grid;
     grid-template-columns: repeat( calc( var(--gridCells) + var(--numbersSpacer)), 1fr);
-    aspect-ratio: 1 / 1;
-    gap: min(5px, 1%);
     align-items: center;
     justify-items: center;
-    height: 96vmin;
+
+    height: 96vmin; /* 100% of smallest dimension - margin */
     margin: 2vmin;
     width: auto;
-    grid-area: a;
+    aspect-ratio: 1 / 1;
+
+    grid-area: a; /* For phone mode */
 }
 
 .cell {
     width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    
     background-color: var(--boardColor);
     display: flex;
+
     justify-content: center;
     align-items: center;
+
     cursor: pointer;
-    aspect-ratio: 1 / 1;
-    height: auto;
-    box-sizing: border-box;
+
+    box-sizing: border-box; /* Border inside */
+
+    box-shadow: 
+      inset var(--gridBorders) var(--gridBorders) 0 0 var(--blackColor),                  /* NW & SE borders inside*/
+      inset var(--inverseGridBorders) var(--inverseGridBorders) 0 0 var(--blackColor),
+      var(--gridBorders) var(--gridBorders) 0 0 var(--blackColor),                        /* Outside borders to fix corner pieces*/
+      var(--inverseGridBorders) var(--inverseGridBorders) 0 0 var(--blackColor),
+      var(--gridBorders) var(--inverseGridBorders) 0 0 var(--blackColor),
+      var(--inverseGridBorders) var(--gridBorders) 0 0 var(--blackColor);
 }
 
 .cell.disabled {
-    background-color: var(--bgColor);
+    opacity: 0;
 }
-
-
-
 
 
 
@@ -43,6 +53,7 @@
     position: relative;
     aspect-ratio: 1 / 1;
     height: auto;
+    
 }
 
 .cell.black > .marker::before,
@@ -56,17 +67,18 @@
   border-radius: 50%;
   backface-visibility: hidden;
   transition: background-color 0.3s;
+  box-shadow: -0.25svb 0.25svb 1svb rgba(0,0,0,0.2), 0 0 2svb rgba(0,0,0,0.2), inset 0.5svb -0.5svb 1svb rgba(0,0,0,0.3), inset -0.5svb 0.5svb 1svb rgba(0,0,0,0.1);
 }
 
 .cell.black > .marker::before,
 .cell.white > .marker::before {
-  background-color: var(--blackColor);
+  background: radial-gradient(circle at 30% 30%, var(--blackColorLightened), var(--blackColor));
   transform: rotateY(0deg);
 }
 
 .cell.black > .marker::after,
 .cell.white > .marker::after {
-  background-color: var(--whiteColor);
+  background: radial-gradient(circle at 30% 30%, var(--whiteColor), var(--whiteColorDarkened));
   transform: rotateY(180deg);
 }
 
@@ -117,4 +129,5 @@
   height: auto;
   width: 100%;
   aspect-ratio: 1 / 1;
+  background-color: var(--bgColor);
 }

@@ -2,14 +2,17 @@
     --bgColor: #f0f0f0;
     --boardColor: #083;
     --blackColor: #000;
+    --blackColorLightened: #333;
     --whiteColor: #fff;
+    --whiteColorDarkened: #ccc;
     --highlightColor: var(--blackColor);
     
-    --markerSize: calc( 100vh / 15 );
-    --cellSize: calc( var(--markerSize) * 1.25 );
     --gridCells: 8;
     --highlightRotation: rotateY(0deg);
 
     --numbersDisplay: none;
     --numbersSpacer: 0;
+
+    --gridBorders: min(2.5px, 0.5svb);
+    --inverseGridBorders: calc( -1 * min(2.5px, 0.5svb));
 }
