@@ -23,15 +23,13 @@
         
     </head>
     <body>
-        <div id="infopanel" class="sidepanel">
+        <div id="infopanel" class="sidepanel" hidden>
             <h1></h1>
-            <p id="scores" hidden>
-                <span class="infospan right" id="blackLabel">Svart</span><span class="infospan left hideable" id="blackInfo">---</span><br />
-                <span class="infospan right" id="whiteLabel">  Vit</span><span class="infospan left hideable" id="whiteInfo">---</span><br />
-                <span class="infospan right hideable">Tomma</span><span class="infospan left hideable" id="emptyInfo">---</span><br />
-                <span class="infospan right hideable debugitem">Bscore</span><span class="infospan left hideable debugitem" id="bsInfo">---</span><br class="debugitem" />
-                <span class="infospan right hideable debugitem">Wscore</span><span class="infospan left hideable debugitem" id="wsInfo">---</span><br class="debugitem" />
-            </p>
+            <div id="blackLabel"  class="marker black"></div><span class="infospan left hideable" id="blackInfo">---</span>
+            <div id="whiteLabel" class=" marker white"></div><span class="infospan left hideable" id="whiteInfo">---</span>
+            <span class="infospan right hideable">Tomma</span><span class="infospan left hideable" id="emptyInfo">---</span>
+            <span class="infospan right hideable debugitem">Bscore</span><span class="infospan left hideable debugitem" id="bsInfo">---</span>
+            <span class="infospan right hideable debugitem">Wscore</span><span class="infospan left hideable debugitem" id="wsInfo">---</span>
         </div>
 
         <div class="grid" id="grid"></div> 
@@ -70,7 +68,8 @@
             </select>
             <button class="controlButton" style="font-size: 1svb;" onclick="toggleScores()">Toggle scores</button>
             <button class="controlButton" style="font-size: 1svb;" onclick="toggleNumbers()">Toggle labels</button>
-            
+            <button class="controlButton span2" style="color: #607; background-color: #f2a;" onclick="toggleEmilyMode()">Emily</button>
+
         </div>
 
     </body>

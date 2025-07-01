@@ -50,7 +50,6 @@
     position: relative;
     aspect-ratio: 1 / 1;
     height: auto;
-    
 }
 
 .cell.black > .marker::before,
@@ -87,24 +86,41 @@
   transform: rotateY(180deg);
 }
 
-.cell.cell.empty > .marker {
-  transform: var(--highlightRotation);
+#grid[colortomove="B"] > .cell.empty > .marker {
+  transform: rotateY(0deg);
+}
+
+#grid[colortomove="W"] > .cell.empty > .marker {
+  transform: rotateY(180deg);
 }
 
 #grid:not([unguided]) > .cell.empty.impossible > .marker {
     display: none;
 }
 
-#grid:not([unguided]) > .cell.empty.possible > .marker {
-    box-shadow: 0px 0px 10px var(--highlightColor);
+#grid[colortomove="B"]:not([unguided]) > .cell.empty.possible > .marker {
+    box-shadow: 0px 0px 10px var(--blackColor);
     opacity: 50%;
 }
 
-.cell.empty:hover > .marker {
-    box-shadow: 0px 0px 10px var(--highlightColor);
-    background-color: var(--highlightColor);
+#grid[colortomove="B"] > .cell.empty:hover > .marker {
+    box-shadow: 0px 0px 10px var(--blackColor);
+    background-color: var(--blackColor);
     opacity: 40%;
 }
+
+#grid[colortomove="W"]:not([unguided]) > .cell.empty.possible > .marker {
+    box-shadow: 0px 0px 10px var(--whiteColor);
+    opacity: 50%;
+}
+
+#grid[colortomove="W"] > .cell.empty:hover > .marker {
+    box-shadow: 0px 0px 10px var(--whiteColor);
+    background-color: var(--whiteColor);
+    opacity: 40%;
+}
+
+
 
 .cell.disabled > .marker {
     display: none;

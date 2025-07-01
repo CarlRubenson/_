@@ -41,51 +41,67 @@ body {
     text-align: center;
 }
 
-.bold {
-    font-weight: bolder;
-    text-decoration: underline;
-}
-
 
 #infopanel {
     border: none;
     grid-area: b;
+    grid-template-columns: 1fr 1fr;
+    justify-items: end;
+    align-items: center;
+    gap: 1svb
 }
 
 #infopanel > h1 {
     border: none;
     font-size: 5svb;
+    grid-column: span 2;
 }
 
-#infopanel > #scores {
-    display: grid;
-    grid-template-columns: 1fr 1fr 0;
-}
-
-#infopanel > #scores[hidden] > .hideable {
+#infopanel[hidden] > .hideable {
     opacity: 0;
     pointer-events: none;
+    display: none;
 }
 
-#scores > .infospan {
+#infopanel > .infospan {
     width: 100%;
     display: inline-block;
     font-size: 3svb;
 }
 
-#scores[hidden] > .infospan {
+#infopanel[hidden] > .infospan {
     font-size: 4svb;
 }
 
-#scores > .infospan.right {
+#infopanel > .infospan.right {
     text-align: end;
 }
 
-#scores > .infospan.left {
+#infopanel > .marker {
+    height: 6svb; 
+    width: auto; 
+    aspect-ratio: 1 / 1;
+    margin: 1svb;
+    border: 0.4svb solid black;
+}
+
+#infopanel > .marker.black {
+    background: radial-gradient(circle at 30% 30%, var(--blackColorLightened), var(--blackColor));
+}
+
+#infopanel > .marker.white {
+    background: radial-gradient(circle at 30% 30%, var(--whiteColor), var(--whiteColorDarkened));
+}
+
+#infopanel > .marker.bold {
+    box-shadow: 0 0 0 0.6svb var(--bgColor), 0 0 0 1svb var(--boardColor);
+}
+
+#infopanel > .infospan.left {
     text-align: start;
 }
 
-#scores > .infospan.left::before {
+#infopanel > .infospan.left::before {
     content: ": ";
 }
 

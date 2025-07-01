@@ -5,14 +5,21 @@
     --blackColorLightened: #333;
     --whiteColor: #fff;
     --whiteColorDarkened: #ccc;
-    --highlightColor: var(--blackColor);
     
     --gridCells: 8;
-    --highlightRotation: rotateY(0deg);
 
     --numbersDisplay: none;
     --numbersSpacer: 0;
 
     --gridBorders: min(2.5px, 0.5svb);
     --inverseGridBorders: calc( -1 * min(2.5px, 0.5svb));
+}
+
+
+body[colorMode='Emily'] {
+    --boardColor: #fbc;
+    --blackColor: #607;
+    --blackColorLightened: #80A;
+    --whiteColor: #f2a;
+    --whiteColorDarkened: #d29;
 }

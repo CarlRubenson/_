@@ -185,11 +185,9 @@ async function updateBoard(board){
 
     highlightColor(board.colorToMove);
     if (board.colorToMove == "B"){
-        document.documentElement.style.setProperty('--highlightColor', 'var(--blackColor)');
-        document.documentElement.style.setProperty('--highlightRotation', 'rotateY(0deg)');
+        board.el.setAttribute("colortomove", "B");
     } else {
-        document.documentElement.style.setProperty('--highlightColor', 'var(--whiteColor)');
-        document.documentElement.style.setProperty('--highlightRotation', 'rotateY(180deg)');
+        board.el.setAttribute("colortomove", "W");
     }
 
     if (board.debug) printBoard(board.grid, "obj");
