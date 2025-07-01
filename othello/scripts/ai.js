@@ -45,6 +45,10 @@ function getAttackDimensions(cell){
     return attackDimensions;
 }
 
+function getHypoFromCenter(cell, maxX, maxY){
+    return Math.pow(2, (cell.x - (maxX - 1) / 2) + Math.pow(2, (cell.y - (maxY - 1) / 2)));
+}
+
 
 async function computerMove(board){
 
@@ -54,7 +58,7 @@ async function computerMove(board){
     }
 
     let cell = aiType[board[board.colorToMove]](board.possibleCells);
-    
+
     await new Promise(r => setTimeout(r, aiSpeed.max - aiSpeed.value));
 
     makeMove(board, cell.x, cell.y);

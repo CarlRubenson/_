@@ -64,6 +64,8 @@ const INIT_FUNCTION = (gridTemplate) => {
                 "el": null,
                 "x": x,
                 "y": y,
+                "maxY": maxHeight,
+                "maxX": maxWidth,
                 "disabled": false, 
                 "possible": false,
                 "color": "E"
@@ -394,7 +396,7 @@ const MAIN = () => {
 
     // Populate dropdowns
     Object.keys(aiType).forEach( (name) => {        
-        if (["Human", "Random", "Random Edge", "Random Center"].includes(name)) return; // Defined in html file (needed to make browser remember last selection across reloads)
+        if (["Human", "Random", "Random Safe", "Random Unsafe", "Random Edge", "Random Central"].includes(name)) return; // Defined in html file (needed to make browser remember last selection across reloads)
         const el = document.createElement("option");
         el.setAttribute("value", name);
         el.textContent = name;

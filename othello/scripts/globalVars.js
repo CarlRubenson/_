@@ -103,7 +103,7 @@ const aiType = {
     },
 
     // Will sort possible moves by attack dimensions and pick a random one of the best ones at the moment
-    "Random Edge": function (possibleCells){
+    "Random Safe": function (possibleCells){
         let sortedPossible = possibleCells.map(cell => {
             return [getAttackDimensions(cell), cell];
         });
@@ -117,7 +117,7 @@ const aiType = {
     },
 
     // Will sort possible moves by attack dimensions and pick a random one of the best ones at the moment
-    "Random Center": function (possibleCells){
+    "Random Unsafe": function (possibleCells){
         let sortedPossible = possibleCells.map(cell => {
             return [getAttackDimensions(cell), cell];
         });
@@ -125,6 +125,35 @@ const aiType = {
         sortedPossible.sort((a,b) => {
             if (a[0] == b[0]) return Math.random() - 0.5;
             else return b[0] - a[0];
+        })
+
+        return sortedPossible[0][1];
+    },
+
+    "Random Edges": function (possibleCells){
+        let sortedPossible = possibleCells.map(cell => {
+            const hypo = getHypoFromCenter(cell, cell.maxX, cell.maxY);
+            return [hypo, cell];
+        });
+
+        sortedPossible.sort((a,b) => {
+            if (a[0] == b[0]) return Math.random() - 0.5;
+            else return b[0] - a[0];
+        })
+
+        return sortedPossible[0][1];
+    },
+
+    "Random Central": function (possibleCells){
+        let sortedPossible = possibleCells.map(cell => {
+            const hypo = getHypoFromCenter(cell, cell.maxX, cell.maxY);
+
+            return [hypo, cell];
+        });
+
+        sortedPossible.sort((a,b) => {
+            if (a[0] == b[0]) return Math.random() - 0.5;
+            else return a[0] - b[0];
         })
 
         return sortedPossible[0][1];
