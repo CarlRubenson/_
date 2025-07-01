@@ -105,6 +105,7 @@ body[gameActive] #controls:hover {
     display: grid;
     gap: 2px;
     grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
 }
 
 #controls > button[highlight] {
