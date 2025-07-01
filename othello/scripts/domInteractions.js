@@ -44,18 +44,8 @@ function highlightNewgame(){
 
 function toggleEmilyMode(){
     if (document.body.getAttribute("colorMode") == "Emily"){
-        document.body.setAttribute("colorMode", "standard")/* 
-        document.documentElement.style.setProperty("--bgColor", "#083");
-        document.documentElement.style.setProperty("--blackColor", "#000");
-        document.documentElement.style.setProperty("--blackColorLightened", "#333");
-        document.documentElement.style.setProperty("--whiteColor", "#fff");
-        document.documentElement.style.setProperty("--whiteColorDarkened", "#ccc"); */
+        document.body.setAttribute("colorMode", "standard");
     } else {
-        document.body.setAttribute("colorMode", "Emily")
-       /*  document.documentElement.style.setProperty("--bgColor", "#083");
-        document.documentElement.style.setProperty("--blackColor", "#000");
-        document.documentElement.style.setProperty("--blackColorLightened", "#333");
-        document.documentElement.style.setProperty("--whiteColor", "#fff");
-        document.documentElement.style.setProperty("--whiteColorDarkened", "#ccc"); */
+        document.body.setAttribute("colorMode", "Emily");
     }
 }

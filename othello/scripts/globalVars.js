@@ -130,7 +130,7 @@ const aiType = {
         return sortedPossible[0][1];
     },
 
-    "Random Edges": function (possibleCells){
+    "Random Edge": function (possibleCells){
         let sortedPossible = possibleCells.map(cell => {
             const hypo = getHypoFromCenter(cell, cell.maxX, cell.maxY);
             return [hypo, cell];
