@@ -124,6 +124,7 @@ body[gameActive] #controls:hover {
 
 #controls > select {
     overflow: hidden;
+    max-width: 100%;
 }
 
 #controls > input {

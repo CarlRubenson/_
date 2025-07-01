@@ -257,7 +257,7 @@ function makeMove(board, x, y){
 
 // Check possible directions for empty cell
 function possibleDirections(cell, colorToMove){
-    if (cell.color == "B" || cell.color == "W") return null;
+    if (cell.color == "B" || cell.color == "W") return null;
 
     let inverseColor = colorToMove == "B" ? "W" : "B";
     return cell.neighbors.map((neighbor, i) => {
