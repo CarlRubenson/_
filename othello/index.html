@@ -39,6 +39,7 @@
             <button id="newGame" class="controlButton span2">New game</button>
             <input type="range" id="aiSpeed" name="aiSpeed" min="0" max="2000" value="1500" />
             <select id="boardTemplate" class="controlButton" onchange="highlightNewgame()">
+                <option value="Basic" selected>- Board -</option>
                 <option value="Basic">Basic</option>
                 <option value="Octagon">Octagon</option>
                 <option value="Jumbo">Jumbo</option>
@@ -52,19 +53,23 @@
             <button id="toggleGuided" class="controlButton" onclick="toggleGuidedMode()">Toggle guides</button>
             <select id="blackPieces" class="controlButton" onchange="highlightNewgame()">
                 <option value="Human">Human</option>
-                <option value="Random">Random</option>
-                <option value="Random Safe">Random Safe</option>
-                <option value="Random Unsafe">Random Unsafe</option>
-                <option value="Random Edge">Random Edge</option>
-                <option value="Random Central">Random Central</option>
+                <optgroup label="Computer">
+                    <option value="Random">-Random</option>
+                    <option value="Random Safe">-Random Safe</option>
+                    <option value="Random Unsafe">-Random Unsafe</option>
+                    <option value="Random Edge">-Random Edge</option>
+                    <option value="Random Central">-Random Central</option>
+                </optgroup>
             </select>
             <select id="whitePieces" class="controlButton" onchange="highlightNewgame()">
                 <option value="Human">Human</option>
-                <option value="Random">Random</option>
-                <option value="Random Safe">Random Safe</option>
-                <option value="Random Unsafe">Random Unsafe</option>
-                <option value="Random Edge">Random Edge</option>
-                <option value="Random Central">Random Central</option>
+                <optgroup label="Computer">
+                    <option value="Random">-Random</option>
+                    <option value="Random Safe">-Random Safe</option>
+                    <option value="Random Unsafe">-Random Unsafe</option>
+                    <option value="Random Edge">-Random Edge</option>
+                    <option value="Random Central">-Random Central</option>
+                </optgroup>
             </select>
             <button class="controlButton" style="font-size: 1svb;" onclick="toggleScores()">Toggle scores</button>
             <button class="controlButton" style="font-size: 1svb;" onclick="toggleNumbers()">Toggle labels</button>

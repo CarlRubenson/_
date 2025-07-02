@@ -397,10 +397,10 @@ const MAIN = () => {
         if (["Human", "Random", "Random Safe", "Random Unsafe", "Random Edge", "Random Central"].includes(name)) return; // Defined in html file (needed to make browser remember last selection across reloads)
         const el = document.createElement("option");
         el.setAttribute("value", name);
-        el.textContent = name;
+        el.textContent = `- ${name}`;
 
-        document.getElementById("blackPieces").appendChild(el);
-        document.getElementById("whitePieces").appendChild(el.cloneNode(true));
+        document.getElementById("blackPieces").getElementsByTagName("optgroup")[0].appendChild(el);
+        document.getElementById("whitePieces").getElementsByTagName("optgroup")[0].appendChild(el.cloneNode(true));
     })
     Object.keys(boardTemplates).forEach( (name) => {
         if (["Basic", "Octagon", "Jumbo", "H", "X", "Dotted Edges", "Diamond", "Mini", "Micro"].includes(name)) return; // Defined in html file (needed to make browser remember last selection across reloads)
