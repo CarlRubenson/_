@@ -199,9 +199,7 @@ body[gameActive] #controls:hover {
     border: #0005 1px solid;
     border-radius: 10px;
     padding: 0;
-}
-
-#controls > .controlButton {
+    height: 100%;
     text-align: center;
 }
 
