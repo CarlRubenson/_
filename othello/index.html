@@ -24,9 +24,30 @@
     </head>
     <body>
         <div id="infopanel" class="sidepanel" hidden>
-            <h1></h1>
-            <div id="blackLabel"  class="marker black"></div><span class="infospan left hideable" id="blackInfo">---</span>
-            <div id="whiteLabel" class=" marker white"></div><span class="infospan left hideable" id="whiteInfo">---</span>
+            <div id="blackLabel"  class="marker black">
+                <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="crown">
+	                <path fill="#daa520" fill-rule="evenodd" stroke="#000000" stroke-width="4" stroke-linejoin="bevel" d="M 78.799004 76.016304 C 67.988861 79.699135 31.97706 79.657883 21.05389 76.016304 C 17.845638 74.946732 13.986794 72.106018 14.000025 68.724197 C 14.031101 60.782722 14.000025 22.017151 14.000025 22.017151 L 31.999741 50.8167 L 49.999454 22.017151 L 67.999168 50.8167 L 85.998886 22.017151 C 85.998886 22.017151 86.001389 54.390957 85.998886 68.695122 C 85.998283 72.137527 82.057495 74.906189 78.799004 76.016304 Z"/>
+                </svg>
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' class="smiley">
+                    <circle cx='30' cy='35' r='5' fill='currentColor' />
+                    <circle cx='70' cy='35' r='5' fill='currentColor' />
+                    <path d='M30,65 Q50,80 70,65' stroke='currentColor' stroke-width='4' fill='none' stroke-linecap='round' class="mouth happy" />
+                    <path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" d="M 70 72.5 C 58.132561 72.632912 43.330261 72.449417 30 72.5" class="mouth neutral" />
+                    <path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" d="M 30 72.5 C 43.333333 62.5 56.666667 62.5 70 72.5" class="mouth sad" />
+                </svg>
+            </div><span class="infospan left hideable" id="blackInfo">---</span>
+            <div id="whiteLabel" class=" marker white">
+                <svg width="100" height="100" viewBox="0 0 100 100" stroke-width="4" stroke-linejoin="bevel" xmlns="http://www.w3.org/2000/svg" class="crown">
+	                <path fill="currentColor" fill-rule="evenodd" stroke="currentColor" d="M 78.799004 76.016304 C 67.988861 79.699135 31.97706 79.657883 21.05389 76.016304 C 17.845638 74.946732 13.986794 72.106018 14.000025 68.724197 C 14.031101 60.782722 14.000025 22.017151 14.000025 22.017151 L 31.999741 50.8167 L 49.999454 22.017151 L 67.999168 50.8167 L 85.998886 22.017151 C 85.998886 22.017151 86.001389 54.390957 85.998886 68.695122 C 85.998283 72.137527 82.057495 74.906189 78.799004 76.016304 Z"/>
+                </svg>
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' class="smiley">
+                    <circle cx='30' cy='35' r='5' fill='currentColor' />
+                    <circle cx='70' cy='35' r='5' fill='currentColor' />
+                    <path d='M30,65 Q50,80 70,65' stroke='currentColor' stroke-width='4' fill='none' stroke-linecap='round' class="mouth happy" />
+                    <path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" d="M 70 72.5 C 58.132561 72.632912 43.330261 72.449417 30 72.5" class="mouth neutral" />
+                    <path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" d="M 30 72.5 C 43.333333 62.5 56.666667 62.5 70 72.5" class="mouth sad" />
+                </svg>
+            </div><span class="infospan left hideable" id="whiteInfo">---</span>
             <span class="infospan right hideable">Tomma</span><span class="infospan left hideable" id="emptyInfo">---</span>
             <span class="infospan right hideable debugitem">Bscore</span><span class="infospan left hideable debugitem" id="bsInfo">---</span>
             <span class="infospan right hideable debugitem">Wscore</span><span class="infospan left hideable debugitem" id="wsInfo">---</span>

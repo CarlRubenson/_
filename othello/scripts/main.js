@@ -31,7 +31,7 @@ const INIT_FUNCTION = (gridTemplate) => {
     while (gridElement.firstChild) {
         gridElement.removeChild(gridElement.firstChild);
     }
-    infoText("");  // Clear winner
+
     if (!board.guidedMode) gridElement.setAttribute("unguided", "");
     if (!board.debug) {
         document.querySelectorAll(".debugitem").forEach((el) => el.classList.add("hidden"));
@@ -206,12 +206,11 @@ async function updateBoard(board){
         } else if (board.endcounter == 1) {
             board.endcounter = 2;   // Neither player can move
             document.documentElement.setAttribute("endcounter", board.endcounter);
-            console.log(endGameMessage(board));
             toggleActiveGame(false);
+            endGameNotice(board);
             return;
         }
     } else {
-
         if (board.endcounter > 0) console.log(`Double ${board.colorToMove}!`)
 
         board.endcounter = 0;
@@ -309,29 +308,25 @@ function countPieces(board){
 }
 
 
-function endGameMessage(board){
 
+function endGameNotice(board){
     const pieceCount = countPieces(board);
+    const BL = document.getElementById("blackLabel");
+    const WL = document.getElementById("whiteLabel");
 
-    let str = "";
+    BL.classList.remove("bold");
+    WL.classList.remove("bold");
+
     if (pieceCount.black > pieceCount.white){
-        highlightColor("B");
-        str += infoText("Svart vann!"); 
+        BL.classList.add("winner");
+        WL.classList.add("loser");
     } else if (pieceCount.white > pieceCount.black) {
-        highlightColor("W");
-        str += infoText("Vit vann!"); 
+        BL.classList.add("loser");
+        WL.classList.add("winner");
     } else {
-        str += infoText("Oavgjort!"); 
+        BL.classList.add("draw");
+        WL.classList.add("draw");
     }
-
-    str = `${str}
-    
-Svarta: ${pieceCount.black}    
-Vita:   ${pieceCount.white}
-(Tomma: ${pieceCount.empty})
-    `
-
-    return str;
 }
 
 
@@ -340,12 +335,6 @@ function flip(cell, grid, colorToMove, direction){
     cell.color = colorToMove;
     return flip(cell.neighbors[direction], grid, colorToMove, direction);
 }
-
-function infoText(str){
-    infopanel.getElementsByTagName("h1")[0].textContent = str;
-    return str;
-}
-
 
 function highlightColor(color){
     if (color == "B"){

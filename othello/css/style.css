@@ -83,19 +83,80 @@ body {
     aspect-ratio: 1 / 1;
     margin: 1svb;
     border: 0.4svb solid black;
+    
 }
 
 #infopanel > .marker.black {
     background: radial-gradient(circle at 30% 30%, var(--blackColorLightened), var(--blackColor));
+    color: var(--whiteColor);
 }
 
 #infopanel > .marker.white {
     background: radial-gradient(circle at 30% 30%, var(--whiteColor), var(--whiteColorDarkened));
+    color: var(--blackColor);
 }
 
 #infopanel > .marker.bold {
     box-shadow: 0 0 0 0.6svb var(--bgColor), 0 0 0 1svb var(--boardColor);
 }
+
+
+
+/* #infopanel > .marker.winner::before {
+  content: '👑';
+  position: absolute;
+  top: -2.2svb;
+  left: -0.9svb;
+  transform: rotate(-26deg);
+  font-size: 20px;
+} */
+
+
+html:not([endcounter='2']) > body > #infopanel > .marker > svg { /* No face when gaming */
+  display: none;
+}
+
+html > body > #infopanel > .marker > svg { /* No face when gaming */
+  pointer-events: none;
+}
+
+#infopanel > .marker > svg > path.mouth {
+    display: none;
+}
+
+body > #infopanel > .marker.winner > svg > path.mouth.happy { 
+  display: inline;
+}
+
+body > #infopanel > .marker.loser > svg > path.mouth.sad { 
+  display: inline;
+}
+
+body > #infopanel > .marker.draw > svg > path.mouth.neutral { 
+  display: inline;
+}
+
+#infopanel > .marker.winner {
+    box-shadow: 0 0 0 0.6svb var(--bgColor), 0 0 0 1svb goldenrod;
+}
+
+#infopanel > .marker > svg.crown{
+    display: none;
+    position: absolute;
+    top: -3.6svb;
+    left: -1svb;
+    height: 6svb;
+    aspect-ratio: 1 / 1;
+    width: auto;
+    transform: rotate(-15deg);
+    color: #daa520;
+}
+
+#infopanel > .marker.winner > svg.crown{
+    display: inline;
+}
+
+
 
 #infopanel > .infospan.left {
     text-align: start;
