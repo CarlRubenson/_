@@ -317,6 +317,13 @@ function endGameNotice(board){
     BL.classList.remove("bold");
     WL.classList.remove("bold");
 
+    BL.classList.remove("winner");
+    WL.classList.remove("loser");
+    BL.classList.remove("loser");
+    WL.classList.remove("winner");
+    BL.classList.remove("draw");
+    WL.classList.remove("draw");
+
     if (pieceCount.black > pieceCount.white){
         BL.classList.add("winner");
         WL.classList.add("loser");
