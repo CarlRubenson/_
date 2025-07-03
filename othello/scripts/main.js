@@ -31,6 +31,7 @@ const INIT_FUNCTION = (gridTemplate) => {
     while (gridElement.firstChild) {
         gridElement.removeChild(gridElement.firstChild);
     }
+    clearWinnerStatus();
 
     if (!board.guidedMode) gridElement.setAttribute("unguided", "");
     if (!board.debug) {
@@ -317,12 +318,7 @@ function endGameNotice(board){
     BL.classList.remove("bold");
     WL.classList.remove("bold");
 
-    BL.classList.remove("winner");
-    WL.classList.remove("loser");
-    BL.classList.remove("loser");
-    WL.classList.remove("winner");
-    BL.classList.remove("draw");
-    WL.classList.remove("draw");
+    clearWinnerStatus();
 
     if (pieceCount.black > pieceCount.white){
         BL.classList.add("winner");
@@ -334,6 +330,17 @@ function endGameNotice(board){
         BL.classList.add("draw");
         WL.classList.add("draw");
     }
+}
+
+function clearWinnerStatus(){
+    const BL = document.getElementById("blackLabel");
+    const WL = document.getElementById("whiteLabel");
+    BL.classList.remove("winner");
+    WL.classList.remove("loser");
+    BL.classList.remove("loser");
+    WL.classList.remove("winner");
+    BL.classList.remove("draw");
+    WL.classList.remove("draw");
 }
 
 
